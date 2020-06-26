@@ -1,0 +1,16 @@
+<style>
+  .custom-restricted-width {
+    display: inline-block;
+  }
+</style>
+
+<h3>メモ一覧</h3>
+<div class="pure-menu custom-restricted-width">
+<ul class="pure-menu-list">
+  <% @memos.each do |m|%>
+  <li class="pure-menu-item"><a href="memos/<%= m["id"]%>" class="pure-menu-link"><%= m["title"]%></a></li>
+  <%end%>
+</ul>
+
+<button class="pure-button pure-button-active" type="submit" onclick="location.href='/memos/new'">追加</button>
+</div>
