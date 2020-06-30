@@ -24,7 +24,7 @@ class Memo
   end
 
   def destroy(id: memo_id)
-    File.delete("memos/#{id}.json")
+    CONNNECT.exec("DELETE FROM memos WHERE id = #{id}")
   end
 end
 
