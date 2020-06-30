@@ -1,10 +1,10 @@
-<h3><%= @memo_data["title"]%></h3>
 
-<p><%= @memo_data["body"]%></p>
+<h3><%= @memos[0]["title"]%></h3>
 
-<form class="pure-form pure-form-aligned" method="post" action='/memos/<%= @memo_data["id"] %>'>
+<p><%= @memos[0]["body"]%></p>
+<form class="pure-form pure-form-aligned" method="post" action='/memos/<%= @memos[0]["id"] %>'>
   <button class="pure-button pure-button-active" type="button"
-    onclick="location.href='/memos/<%= @memo_data["id"]%>/edit'">変更</button>
+    onclick="location.href='/memos/<%= @memos[0]["id"]%>/edit'">変更</button>
   <button class="pure-button pure-button-active" type="button" onclick="location.href='/memos'">戻る</button>
   <input type="hidden" name="_method" value="delete">
   <input type="submit" class="pure-button pure-button-active" value="削除">

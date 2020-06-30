@@ -2,17 +2,21 @@
 
 require "sinatra"
 require "sinatra/reloader"
-require "json"
-require "securerandom"
+require "pg"
 
 class Memo
+  CONNNECT = PG.connect(host: "localhost", user: "kosuke", dbname: "memos")
+
+  def self.all_find
+    CONNNECT.exec("SELECT * FROM Memo")
+  end
+
   def self.find(id: memo_id)
-    JSON.parse(File.read("memos/#{id}.json"))
+    CONNNECT.exec("SELECT * FROM Memo WHERE id = '#{id}'")
   end
 
   def self.create(title: memo_title, body: memo_body)
-    memo_info = { id: SecureRandom.uuid, title: title, body: body }
-    File.open("memos/#{memo_info[:id]}.json", "w") { |f| f.puts JSON.pretty_generate(memo_info) }
+    CONNNECT.exec("INSERT INTO Memo (title, body) VALUES ('#{title}', '#{body}')")
   end
 
   def edit(id: memo_id, title: memo_title, body: memo_body)
@@ -26,10 +30,7 @@ class Memo
 end
 
 get "/memos" do
-  files = Dir.glob("memos/*").sort_by { |f| File.mtime(f) }
-  @memos = files.map do |file|
-    JSON.parse(File.read(file))
-  end
+  @memos = Memo.all_find
   erb :top
 end
 
@@ -43,12 +44,12 @@ post "/memos/new" do
 end
 
 get "/memos/:id" do
-  @memo_data = Memo.find(id: params[:id])
+  @memos = Memo.find(id: params[:id])
   erb :show
 end
 
 get "/memos/:id/edit" do
-  @memo_data = Memo.find(id: params[:id])
+  @memos = Memo.find(id: params[:id])
   erb :edit
 end
 
