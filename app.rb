@@ -20,8 +20,7 @@ class Memo
   end
 
   def edit(id: memo_id, title: memo_title, body: memo_body)
-    memo_info = { id: id, title: title, body: body }
-    File.open("memos/#{memo_info[:id]}.json", "w") { |f| f.puts JSON.pretty_generate(memo_info) }
+    CONNNECT.exec("UPDATE Memo SET title = '#{title}', body = '#{body}' WHERE id = '#{id}'")
   end
 
   def destroy(id: memo_id)

@@ -1,13 +1,13 @@
-<form class="pure-form pure-form-aligned" method="post" action="/memos/<%= @memo_data["id"] %>">
+<form class="pure-form pure-form-aligned" method="post" action="/memos/<%= @memos[0]["id"] %>">
   <div class="pure-control-group">
-    <input type="text" name="title" class="form-control" value='<%= @memo_data["title"]%>' input required>
+    <input type="text" name="title" class="form-control" value='<%= @memos[0]["title"]%>' input required>
   </div>
   <div class="pure-control-group">
-    <textarea name="body" class="form-control" rows="5" input required><%= @memo_data["body"]%></textarea>
+    <textarea name="body" class="form-control" rows="5" input required><%= @memos[0]["body"]%></textarea>
   </div>
   <input type="hidden" name="_method" value="patch">
   <input type="submit" class="pure-button pure-button-active" value="保存">
 
   <button class="pure-button pure-button-active" type="button"
-    onclick="location.href='/memos/<%= @memo_data["id"]%>'">戻る</button>
+    onclick="location.href='/memos/<%= @memos[0]["id"]%>'">戻る</button>
 </form>
