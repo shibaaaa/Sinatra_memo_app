@@ -24,7 +24,7 @@ class Memo
   end
 
   def destroy(id: memo_id)
-    CONNNECT.exec("DELETE FROM memos WHERE id = #{id}")
+    CONNNECT.exec("DELETE FROM Memo WHERE id = #{id}")
   end
 end
 
