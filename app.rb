@@ -5,26 +5,26 @@ require "sinatra/reloader"
 require "pg"
 
 class Memo
-  CONNNECT = PG.connect(host: "localhost", user: "kosuke", dbname: "memos")
+  @@connect = PG.connect(host: "localhost", user: "kosuke", dbname: "memos")
 
   def self.all_find
-    CONNNECT.exec("SELECT * FROM Memo")
+    @@connect.exec("SELECT * FROM Memo")
   end
 
   def self.find(id: memo_id)
-    CONNNECT.exec("SELECT * FROM Memo WHERE id = '#{id}'")
+    @@connect.exec("SELECT * FROM Memo WHERE id = '#{id}'")
   end
 
   def self.create(title: memo_title, body: memo_body)
-    CONNNECT.exec("INSERT INTO Memo (title, body) VALUES ('#{title}', '#{body}')")
+    @@connect.exec("INSERT INTO Memo (title, body) VALUES ('#{title}', '#{body}')")
   end
 
   def edit(id: memo_id, title: memo_title, body: memo_body)
-    CONNNECT.exec("UPDATE Memo SET title = '#{title}', body = '#{body}' WHERE id = '#{id}'")
+    @@connect.exec("UPDATE Memo SET title = '#{title}', body = '#{body}' WHERE id = '#{id}'")
   end
 
   def destroy(id: memo_id)
-    CONNNECT.exec("DELETE FROM Memo WHERE id = #{id}")
+    @@connect.exec("DELETE FROM Memo WHERE id = #{id}")
   end
 end
 
