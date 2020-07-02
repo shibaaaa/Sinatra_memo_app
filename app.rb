@@ -5,7 +5,7 @@ require "sinatra/reloader"
 require "pg"
 
 class Memo
-  @@connect = PG.connect(host: "localhost", user: "kosuke", dbname: "memos")
+  @@connect = PG.connect(host: ENV["HOST"], user: "kosuke", dbname: "memos")
 
   def self.all_find
     @@connect.exec("SELECT * FROM Memo")
