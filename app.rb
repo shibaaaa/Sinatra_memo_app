@@ -43,12 +43,12 @@ post "/memos/new" do
 end
 
 get "/memos/:id" do
-  @memos = Memo.find(id: params[:id])
+  @memos = Memo.find(id: params[:id]).first
   erb :show
 end
 
 get "/memos/:id/edit" do
-  @memos = Memo.find(id: params[:id])
+  @memos = Memo.find(id: params[:id]).first
   erb :edit
 end
 
