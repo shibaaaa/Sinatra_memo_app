@@ -29,7 +29,7 @@ class Memo
 end
 
 get "/memos" do
-  @memos = Memo.all_find
+  @memo = Memo.all_find
   erb :top
 end
 
@@ -43,12 +43,12 @@ post "/memos/new" do
 end
 
 get "/memos/:id" do
-  @memos = Memo.find(id: params[:id]).first
+  @memo = Memo.find(id: params[:id]).first
   erb :show
 end
 
 get "/memos/:id/edit" do
-  @memos = Memo.find(id: params[:id]).first
+  @memo = Memo.find(id: params[:id]).first
   erb :edit
 end
 
